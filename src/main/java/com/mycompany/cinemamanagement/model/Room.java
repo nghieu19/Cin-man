@@ -1,11 +1,22 @@
 package com.mycompany.cinemamanagement.model;
 
 public class Room {
+
     private int id;
     private String nameRoom;
     private int capacity;
+    private boolean available;
 
-    public Room() {}
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public Room() {
+    }
 
     public int getId() {
         return id;

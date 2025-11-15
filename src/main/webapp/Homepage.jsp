@@ -139,7 +139,7 @@
     </div>
 
     <div class="container">
-        <h2>🎬 Cinema</h2>
+        <h2>Cinema</h2>
 
         <!-- 🔍 Search Form -->
         <form action="movie" method="get" class="row g-3 justify-content-center mb-4">

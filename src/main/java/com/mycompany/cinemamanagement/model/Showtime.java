@@ -3,13 +3,19 @@ package com.mycompany.cinemamanagement.model;
 import java.util.Date;
 
 public class Showtime {
+
     private int id;
     private Date showtimeDate;
     private String timeSlot;
     private Room room;
     private Movie movie;
 
+    // ⭐ Thêm thuộc tính Price cho suất chiếu
+    private double price;
+
     public Showtime() {}
+
+    // ===== Getter & Setter =====
 
     public int getId() {
         return id;
@@ -49,5 +55,14 @@ public class Showtime {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    // ⭐ Getter + Setter cho Price
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

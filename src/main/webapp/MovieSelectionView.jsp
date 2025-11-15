@@ -51,10 +51,27 @@
 
             <%
                 List<Movie> movies = (List<Movie>) request.getAttribute("movies");
+
                 String date = (String) request.getAttribute("date");
-                String timeslot = (String) request.getAttribute("timeslot");
+                String startTime = (String) request.getAttribute("startTime");
+                String endTime = (String) request.getAttribute("endTime");
                 String roomId = (String) request.getAttribute("roomId");
+                String price = (String) request.getAttribute("price");   // ⭐ Lấy price
             %>
+
+            <div style="margin: 20px 0; font-size: 18px; color: #fff;">
+                <p style="margin-bottom: 10px;"><strong>Showtime Date:</strong> <%= date%></p>
+                <p style="margin-bottom: 10px;"><strong>Timeslot:</strong> <%= startTime%> - <%= endTime%></p>
+                <p style="margin-bottom: 10px;"><strong>Room:</strong> Room <%= roomId%></p>
+                <p style="margin-bottom: 10px;"><strong>Price:</strong> <%= price%> VNĐ</p>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.3); margin: 10px 0 25px 0;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="m-0"></h4>
+                <a href="AddMovieView.jsp" class="btn btn-outline-light">+ Add Movie</a>
+            </div>
+
 
             <table class="table table-dark table-hover text-center align-middle">
                 <thead>
@@ -78,14 +95,16 @@
                             <form action="ShowtimeServlet" method="get">
                                 <input type="hidden" name="action" value="confirm">
                                 <input type="hidden" name="movieId" value="<%= m.getId()%>">
-                                <input type="hidden" name="roomId" value="<%= request.getAttribute("roomId")%>">
-                                <input type="hidden" name="date" value="<%= request.getAttribute("date")%>">
-                                <input type="hidden" name="startTime" value="<%= request.getAttribute("startTime")%>">
-                                <input type="hidden" name="endTime" value="<%= request.getAttribute("endTime")%>">
+
+                                <!-- ⭐ Truyền toàn bộ dữ liệu -->
+                                <input type="hidden" name="roomId" value="<%= roomId%>">
+                                <input type="hidden" name="date" value="<%= date%>">
+                                <input type="hidden" name="startTime" value="<%= startTime%>">
+                                <input type="hidden" name="endTime" value="<%= endTime%>">
+                                <input type="hidden" name="price" value="<%= price%>">  <!-- ⭐ PRICE -->
+
                                 <button type="submit" class="btn btn-warning btn-sm">Select</button>
                             </form>
-
-
                         </td>
                     </tr>
                     <%
@@ -93,15 +112,9 @@
                     } else {
                     %>
                     <tr><td colspan="4">No movies available.</td></tr>
-                    <%
-                        }
-                    %>
+                    <% }%>
                 </tbody>
             </table>
-
-            <div class="text-start mt-3">
-                <a href="AddMovieView.jsp" class="btn btn-outline-light">+ Add Movie</a>
-            </div>
         </div>
     </body>
 </html>

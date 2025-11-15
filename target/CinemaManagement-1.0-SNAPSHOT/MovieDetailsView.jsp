@@ -103,14 +103,14 @@
                             = (com.mycompany.cinemamanagement.model.Movie) request.getAttribute("result");
                     if (m != null) {
                 %>
-                <p><span class="detail-label">🎬 Movie Name:</span> <%=m.getMovieName()%></p>
-                <p><span class="detail-label">📅 Year of Production:</span> <%=m.getYearOfProduction()%></p>
-                <p><span class="detail-label">🎭 Type:</span> <%=m.getType()%></p>
-                <p><span class="detail-label">🎥 Director:</span> <%=m.getDirector()%></p>
-                <p><span class="detail-label">⭐ Actor:</span> <%=m.getActor()%></p>
-                <p><span class="detail-label">🌐 Language:</span> <%=m.getLanguage()%></p>
-                <p><span class="detail-label">⏱ Duration:</span> <%=m.getDuration()%> minutes</p>
-                <p><span class="detail-label">📝 Description:</span> <%=m.getDescription()%></p>
+                <p><span class="detail-label">Movie Name:</span> <%=m.getMovieName()%></p>
+                <p><span class="detail-label">Year of Production:</span> <%=m.getYearOfProduction()%></p>
+                <p><span class="detail-label">Type:</span> <%=m.getType()%></p>
+                <p><span class="detail-label">Director:</span> <%=m.getDirector()%></p>
+                <p><span class="detail-label">Actor:</span> <%=m.getActor()%></p>
+                <p><span class="detail-label">Language:</span> <%=m.getLanguage()%></p>
+                <p><span class="detail-label">Duration:</span> <%=m.getDuration()%> minutes</p>
+                <p><span class="detail-label">Description:</span> <%=m.getDescription()%></p>
                 <%
                 } else {
                 %>
@@ -121,7 +121,7 @@
             </div>
 
             <div class="text-center">
-                <a href="Homepage.jsp" class="btn-back">← Back to Home</a>
+                <a href="Homepage.jsp" class="btn-back">Back</a>
             </div>
         </div>
 

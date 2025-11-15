@@ -36,7 +36,7 @@
 
 <body>
 <div class="container">
-    <h2 class="mb-4 text-center">🎬 Add New Movie</h2>
+    <h2 class="mb-4 text-center">Add New Movie</h2>
 
     <!-- Form gửi dữ liệu về MovieServlet -->
     <form action="movie" method="post">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="type" class="form-label">Genre / Type</label>
+            <label for="type" class="form-label"> Type</label>
             <input type="text" class="form-control" id="type" name="type" placeholder="e.g. Action, Drama, Romance">
         </div>
 

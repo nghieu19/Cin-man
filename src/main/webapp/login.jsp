@@ -93,7 +93,7 @@
 <body>
 
     <div class="login-box">
-        <h2>🎬 Login to Cinema</h2>
+        <h2>Login</h2>
 
         <form action="LoginServlet" method="post">
             <div class="mb-3">
