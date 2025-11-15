@@ -36,11 +36,6 @@ public class RoomServlet extends HttpServlet {
             case "available":
                 getAvailableRooms(request, response);
                 break;
-
-            case "detail":
-                getRoomDetail(request, response);
-                break;
-
             default:
                 response.sendError(400, "Invalid Room action");
         }
@@ -79,23 +74,4 @@ public class RoomServlet extends HttpServlet {
     }
 }
 
-
-    /**
-     * ✅ Lấy chi tiết 1 phòng
-     */
-    private void getRoomDetail(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        try {
-            int roomId = Integer.parseInt(request.getParameter("roomId"));
-            Room room = roomDAO.getRoomById(roomId);
-
-            request.setAttribute("room", room);
-            request.getRequestDispatcher("RoomDetailView.jsp").forward(request, response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(500, "Error loading room details");
-        }
-    }
 }
