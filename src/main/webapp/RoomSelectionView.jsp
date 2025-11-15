@@ -55,7 +55,6 @@
                 color: #000;
             }
 
-            /* ❌ Phòng bận */
             .busy-room {
                 background-color: #b02a37 !important;
                 color: #fff !important;
@@ -103,18 +102,32 @@
                         ? request.getParameter("price")
                         : (String) request.getAttribute("price");
                 List<Room> rooms = (List<Room>) request.getAttribute("rooms");
+
+                // ⭐ FORMAT PRICE: 150000 → 150.000
+                String formattedPrice = "N/A";
+                if (price != null && !price.isEmpty()) {
+                    try {
+                        long p = Long.parseLong(price);
+                        formattedPrice = String.format("%,d", p).replace(",", ".");
+                    } catch (Exception e) {
+                        formattedPrice = price;
+                    }
+                }
             %>
 
             <p><strong>Showtime Date:</strong> <%= (date != null ? date : "N/A")%></p>
             <p><strong>Timeslot:</strong> <%= (startTime != null && endTime != null) ? startTime + " - " + endTime : "N/A"%></p>
-            <p><strong>Price:</strong> <%= (price != null ? price : "N/A")%> VNĐ</p>
+
+            <!-- ⭐ HIỂN THỊ GIÁ ĐÃ FORMAT -->
+            <p><strong>Price:</strong> <%= formattedPrice%> VNĐ</p>
+
             <hr class="info-line">
 
             <div class="row text-center">
                 <%
                     if (rooms != null && !rooms.isEmpty()) {
                         for (Room r : rooms) {
-                            boolean available = r.isAvailable();   // ⬅ lấy trạng thái
+                            boolean available = r.isAvailable();
                 %>
                 <div class="col-md-4 col-sm-6">
 
@@ -124,25 +137,13 @@
                         <input type="hidden" name="date" value="<%= date%>">
                         <input type="hidden" name="startTime" value="<%= startTime%>">
                         <input type="hidden" name="endTime" value="<%= endTime%>">
-                        <input type="hidden" name="price" value="<%= price %>">
-
+                        <input type="hidden" name="price" value="<%= price%>">
 
                         <button type="submit"
                                 class="room-btn <%= available ? "" : "busy-room"%>"
                                 <%= available ? "" : "disabled"%>>
-
                             <%= r.getNameRoom()%><br>
                             <small><%= r.getCapacity()%> seats</small>
-
-                            <%
-                                if (!available) {
-                            %>
-                            <div style="color: yellow; font-weight: bold; margin-top: 5px;">
-                            </div>
-                            <%
-                                }
-                            %>
-
                         </button>
 
                     </form>
@@ -161,7 +162,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="create_showtime.jsp" class="back-btn">← Back</a>
+                <a href="ShowtimeCreationView.jsp" class="back-btn">Back</a>
             </div>
         </div>
     </body>

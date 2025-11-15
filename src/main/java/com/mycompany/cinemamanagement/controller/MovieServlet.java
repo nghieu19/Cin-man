@@ -52,7 +52,6 @@ public class MovieServlet extends HttpServlet {
         }
     }
 
-    // 📜 Danh sách phim
     private void listMovies(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         List<Movie> list = movieDAO.getAllMovies();
@@ -61,8 +60,6 @@ public class MovieServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // 🔍 Tìm kiếm phim
-    // 🔍 Tìm kiếm phim
     private void searchMovie(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         String keyword = request.getParameter("keyword");
@@ -81,7 +78,6 @@ public class MovieServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // 🎬 Hiển thị chi tiết phim
     private void showDetails(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -91,14 +87,12 @@ public class MovieServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // ➕ Form thêm phim
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("AddMovie.jsp");
         dispatcher.forward(request, response);
     }
 
-    // 💾 Thêm phim vào DB
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -131,7 +125,23 @@ public class MovieServlet extends HttpServlet {
             boolean success = movieDAO.addMovie(movie);
 
             if (success) {
-                response.sendRedirect("movie?action=list");
+
+                // Lấy lại các tham số showtime đã truyền từ AddMovieView.jsp
+                String date = request.getParameter("date");
+                String startTime = request.getParameter("startTime");
+                String endTime = request.getParameter("endTime");
+                String roomId = request.getParameter("roomId");
+                String price = request.getParameter("price");
+
+                // Redirect về MovieSelectionView.jsp
+                response.sendRedirect(
+                        "ShowtimeServlet?action=selectMovie"
+                        + "&date=" + date
+                        + "&startTime=" + startTime
+                        + "&endTime=" + endTime
+                        + "&roomId=" + roomId
+                        + "&price=" + price
+                );
             } else {
                 response.getWriter().println("❌ Failed to add movie. Please try again!");
             }
