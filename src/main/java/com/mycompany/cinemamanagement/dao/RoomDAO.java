@@ -25,60 +25,39 @@ public class RoomDAO extends DAO {
      * @param endTime java.sql.Time
      */
     public List<Room> getAvailableRooms(Date showDate, Time startTime, Time endTime) {
-    List<Room> list = new ArrayList<>();
+        List<Room> list = new ArrayList<>();
 
-    String sql =
-        "SELECT r.*, " +
-        "   CASE WHEN EXISTS ( " +
-        "       SELECT 1 FROM showtime s " +
-        "       WHERE s.room_id = r.id " +
-        "         AND s.show_date = ? " +
-        "         AND (s.start_time < ? AND s.end_time > ?) " +
-        "   ) THEN 0 ELSE 1 END AS isAvailable " +
-        "FROM room r " +
-        "ORDER BY r.id";
+        String sql
+                = "SELECT r.*, "
+                + "   CASE WHEN EXISTS ( "
+                + "       SELECT 1 FROM showtime s "
+                + "       WHERE s.room_id = r.id "
+                + "         AND s.show_date = ? "
+                + "         AND (s.start_time < ? AND s.end_time > ?) "
+                + "   ) THEN 0 ELSE 1 END AS isAvailable "
+                + "FROM room r "
+                + "ORDER BY r.id";
 
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setDate(1, showDate);
-        ps.setTime(2, endTime);   // lưu ý: end trước
-        ps.setTime(3, startTime); // start sau
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Room r = new Room();
-            r.setId(rs.getInt("id"));
-            r.setNameRoom(rs.getString("nameRoom"));
-            r.setCapacity(rs.getInt("capacity"));
-            r.setAvailable(rs.getInt("isAvailable") == 1); // 1 = trống, 0 = bận
-
-            list.add(r);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    return list;
-}
-
-
-    /**
-     * ✅ Lấy 1 phòng theo ID
-     */
-    public Room getRoomById(int id) {
-        Room room = null;
-        String sql = "SELECT * FROM room WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setDate(1, showDate);
+            ps.setTime(2, endTime);   // lưu ý: end trước
+            ps.setTime(3, startTime); // start sau
+
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                room = new Room();
-                room.setId(rs.getInt("id"));
-                room.setNameRoom(rs.getString("nameRoom"));
-                room.setCapacity(rs.getInt("capacity"));
+            while (rs.next()) {
+                Room r = new Room();
+                r.setId(rs.getInt("id"));
+                r.setNameRoom(rs.getString("nameRoom"));
+                r.setCapacity(rs.getInt("capacity"));
+                r.setAvailable(rs.getInt("isAvailable") == 1); // 1 = trống, 0 = bận
+
+                list.add(r);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return room;
+
+        return list;
     }
+
 }

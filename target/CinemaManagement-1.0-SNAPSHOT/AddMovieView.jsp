@@ -37,16 +37,12 @@
     <body>
         <div class="container">
             <h2 class="mb-4 text-center">Add New Movie</h2>
-
-            <!-- Form gửi dữ liệu về MovieServlet -->
             <form action="movie" method="post">
-
-                <!-- ⭐ GIỮ LẠI CÁC PARAM SHOWTIME -->
-                <input type="hidden" name="date" value="<%= request.getParameter("date") %>">
-                <input type="hidden" name="startTime" value="<%= request.getParameter("startTime") %>">
-                <input type="hidden" name="endTime" value="<%= request.getParameter("endTime") %>">
-                <input type="hidden" name="roomId" value="<%= request.getParameter("roomId") %>">
-                <input type="hidden" name="price" value="<%= request.getParameter("price") %>">
+                <input type="hidden" name="date" value="<%= request.getParameter("date")%>">
+                <input type="hidden" name="startTime" value="<%= request.getParameter("startTime")%>">
+                <input type="hidden" name="endTime" value="<%= request.getParameter("endTime")%>">
+                <input type="hidden" name="roomId" value="<%= request.getParameter("roomId")%>">
+                <input type="hidden" name="price" value="<%= request.getParameter("price")%>">
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Movie Name</label>
@@ -90,21 +86,23 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="notes" class="form-label">Notes</label>
+                    <label for="notes" class="form-label">Warning</label>
                     <textarea class="form-control" id="notes" name="notes" rows="2"
                               placeholder="Any special notes..."></textarea>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
+                    <%
+                        String backUrl = "ShowtimeServlet?action=selectMovie"
+                                + "&date=" + request.getParameter("date")
+                                + "&startTime=" + request.getParameter("startTime")
+                                + "&endTime=" + request.getParameter("endTime")
+                                + "&roomId=" + request.getParameter("roomId")
+                                + "&price=" + request.getParameter("price");
+                    %>
 
-                    <!-- ⭐ BACK: quay về MovieSelection -->
-                    <a href="ShowtimeServlet?action=selectMovie
-                        &date=<%= request.getParameter("date")%>
-                        &startTime=<%= request.getParameter("startTime")%>
-                        &endTime=<%= request.getParameter("endTime")%>
-                        &roomId=<%= request.getParameter("roomId")%>
-                        &price=<%= request.getParameter("price")%>"
-                       class="btn btn-outline-light px-4">Back</a>
+                    <a href="<%= backUrl%>" class="btn btn-outline-light px-4">Back</a>
+
 
                     <button type="submit" class="btn btn-custom px-4">Save Movie</button>
 

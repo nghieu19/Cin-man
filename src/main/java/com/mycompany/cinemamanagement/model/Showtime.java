@@ -1,17 +1,19 @@
 package com.mycompany.cinemamanagement.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Showtime {
 
     private int id;
-    private Date showtimeDate;
-    private String timeSlot;
-    private Room room;
-    private Movie movie;
+    private Date showDate;     // map với show_date
+    private Time startTime;    // map với start_time
+    private Time endTime;      // map với end_time
 
-    // ⭐ Thêm thuộc tính Price cho suất chiếu
-    private double price;
+    private Room room;         // map với room_id
+    private Movie movie;       // map với movie_id
+
+    private double price;      // map với price
 
     public Showtime() {}
 
@@ -25,20 +27,28 @@ public class Showtime {
         this.id = id;
     }
 
-    public Date getShowtimeDate() {
-        return showtimeDate;
+    public Date getShowDate() {
+        return showDate;
     }
 
-    public void setShowtimeDate(Date showtimeDate) {
-        this.showtimeDate = showtimeDate;
+    public void setShowDate(Date showDate) {
+        this.showDate = showDate;
     }
 
-    public String getTimeSlot() {
-        return timeSlot;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setTimeSlot(String timeSlot) {
-        this.timeSlot = timeSlot;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     public Room getRoom() {
@@ -57,7 +67,6 @@ public class Showtime {
         this.movie = movie;
     }
 
-    // ⭐ Getter + Setter cho Price
     public double getPrice() {
         return price;
     }

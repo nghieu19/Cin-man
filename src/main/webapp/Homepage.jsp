@@ -128,6 +128,18 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* ⭐ Căn trái Movie Name và Description */
+        td.movie-name {
+            text-align: left !important;
+            padding-left: 18px;
+        }
+
+        td.movie-desc {
+            text-align: left !important;
+            padding-left: 18px;
+        }
+
     </style>
 </head>
 
@@ -171,10 +183,14 @@
                 <tbody>
                 <% for (com.mycompany.cinemamanagement.model.Movie m : list) { %>
                     <tr>
-                        <td><a href="movie?action=details&id=<%=m.getId()%>"><%=m.getMovieName()%></a></td>
+                        <td class="movie-name">
+                            <a href="movie?action=details&id=<%=m.getId()%>"><%=m.getMovieName()%></a>
+                        </td>
+
                         <td><%=m.getType()%></td>
                         <td><%=m.getYearOfProduction()%></td>
-                        <td><%=m.getDescription()%></td>
+
+                        <td class="movie-desc"><%=m.getDescription()%></td>
                     </tr>
                 <% } %>
                 </tbody>

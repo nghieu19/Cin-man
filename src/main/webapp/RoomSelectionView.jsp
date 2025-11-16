@@ -117,18 +117,18 @@
 
             <p><strong>Showtime Date:</strong> <%= (date != null ? date : "N/A")%></p>
             <p><strong>Timeslot:</strong> <%= (startTime != null && endTime != null) ? startTime + " - " + endTime : "N/A"%></p>
-
-            <!-- ⭐ HIỂN THỊ GIÁ ĐÃ FORMAT -->
             <p><strong>Price:</strong> <%= formattedPrice%> VNĐ</p>
 
             <hr class="info-line">
 
             <div class="row text-center">
+
                 <%
                     if (rooms != null && !rooms.isEmpty()) {
                         for (Room r : rooms) {
                             boolean available = r.isAvailable();
                 %>
+
                 <div class="col-md-4 col-sm-6">
 
                     <form action="ShowtimeServlet" method="get">
@@ -160,6 +160,19 @@
                     }
                 %>
             </div>
+            <!-- ⭐ LEGEND CHÚ THÍCH -->
+            <div class="d-flex justify-content-center mb-3" style="gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; background-color: #495057; border-radius: 4px;"></div>
+                    <span>Available Room</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 18px; height: 18px; background-color: #b02a37; border-radius: 4px; border: 2px solid #ff0000;"></div>
+                    <span>Busy Room</span>
+                </div>
+            </div>
+
+
 
             <div class="text-center mt-4">
                 <a href="ShowtimeCreationView.jsp" class="back-btn">Back</a>

@@ -121,7 +121,7 @@
             </div>
 
             <div class="text-center">
-                <a href="Homepage.jsp" class="btn-back">Back</a>
+                <button onclick="history.back()" class="btn-back">Back</button>
             </div>
         </div>
 

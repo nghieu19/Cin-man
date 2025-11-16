@@ -8,16 +8,9 @@ public class UserDAO extends DAO {
     public UserDAO() {
         super();
     }
-
-    /**
-     * ✅ Kiểm tra thông tin đăng nhập
-     * @param username Tên đăng nhập
-     * @param password Mật khẩu
-     * @return Đối tượng User nếu đăng nhập thành công, null nếu thất bại
-     */
     public User checkLogin(String username, String password) {
         User user = null;
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT id, username, role FROM user WHERE username = ? AND password = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, username);
@@ -25,25 +18,18 @@ public class UserDAO extends DAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    // ✅ Dùng getString với try-catch để tránh lỗi khi thiếu cột (vd: full_name)
-                    String fullName = null;
-                    try { fullName = rs.getString("full_name"); } catch (SQLException ignored) {}
-
-                    user = new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        fullName,
-                        rs.getString("role")
-                    );
+                    user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setRole(rs.getString("role"));
                 }
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Lỗi truy vấn checkLogin: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("❌ Lỗi checkLogin: " + e.getMessage());
         }
 
         return user;
     }
+
 }

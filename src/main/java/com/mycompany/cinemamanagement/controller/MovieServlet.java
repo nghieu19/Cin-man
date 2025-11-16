@@ -66,10 +66,8 @@ public class MovieServlet extends HttpServlet {
 
         List<Movie> list;
         if (keyword == null || keyword.trim().isEmpty()) {
-            // 🟡 Nếu không nhập gì thì hiển thị toàn bộ phim
             list = movieDAO.getAllMovies();
         } else {
-            // 🟢 Nếu có từ khóa thì tìm kiếm chính xác (không phân biệt hoa thường)
             list = movieDAO.getMovieByName(keyword.trim());
         }
 
@@ -81,7 +79,7 @@ public class MovieServlet extends HttpServlet {
     private void showDetails(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Movie movie = movieDAO.getMovieById(id);
+        Movie movie = movieDAO.getMovieDetails(id);
         request.setAttribute("result", movie);
         RequestDispatcher dispatcher = request.getRequestDispatcher("MovieDetailsView.jsp");
         dispatcher.forward(request, response);
@@ -125,15 +123,12 @@ public class MovieServlet extends HttpServlet {
             boolean success = movieDAO.addMovie(movie);
 
             if (success) {
-
-                // Lấy lại các tham số showtime đã truyền từ AddMovieView.jsp
                 String date = request.getParameter("date");
                 String startTime = request.getParameter("startTime");
                 String endTime = request.getParameter("endTime");
                 String roomId = request.getParameter("roomId");
                 String price = request.getParameter("price");
-
-                // Redirect về MovieSelectionView.jsp
+                
                 response.sendRedirect(
                         "ShowtimeServlet?action=selectMovie"
                         + "&date=" + date

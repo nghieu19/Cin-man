@@ -112,23 +112,23 @@ public class ShowtimeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String dateStr = request.getParameter("date");
-            String startStr = request.getParameter("startTime");
-            String endStr = request.getParameter("endTime");
-            String price = request.getParameter("price");   // ⭐ LẤY PRICE
-            int roomId = Integer.parseInt(request.getParameter("roomId"));
-            int movieId = Integer.parseInt(request.getParameter("movieId"));
+            String movieId = request.getParameter("movieId");
+            String roomId = request.getParameter("roomId");
+            String date = request.getParameter("date");
+            String startTime = request.getParameter("startTime");
+            String endTime = request.getParameter("endTime");
+            String price = request.getParameter("price");
 
-            Movie movie = movieDAO.getMovieById(movieId);
-            RoomDAO roomDAO = new RoomDAO();
-            Room room = roomDAO.getRoomById(roomId);
+            String movieName = request.getParameter("movieName");
+            String duration = request.getParameter("duration");
 
-            request.setAttribute("movie", movie);
-            request.setAttribute("room", room);
-            request.setAttribute("date", dateStr);
-            request.setAttribute("startTime", startStr);
-            request.setAttribute("endTime", endStr);
-            request.setAttribute("price", price);   // ⭐ TRUYỀN PRICE SANG CONFIRM VIEW
+            request.setAttribute("movieName", movieName);
+            request.setAttribute("duration", duration);
+            request.setAttribute("roomId", roomId);
+            request.setAttribute("date", date);
+            request.setAttribute("startTime", startTime);
+            request.setAttribute("endTime", endTime);
+            request.setAttribute("price", price);
 
             request.getRequestDispatcher("ConfirmView.jsp").forward(request, response);
 

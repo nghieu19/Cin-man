@@ -104,10 +104,6 @@
             </div>
             <button type="submit" class="btn-login">Login</button>
         </form>
-
-        <div class="mt-4">
-            <small>Don't have an account? <a href="register.jsp">Register here</a></small>
-        </div>
     </div>
 
 </body>

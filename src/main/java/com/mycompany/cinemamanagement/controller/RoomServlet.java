@@ -22,9 +22,6 @@ public class RoomServlet extends HttpServlet {
         roomDAO = new RoomDAO();
     }
 
-    /**
-     * ✅ Điều hướng GET
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -63,7 +60,7 @@ public class RoomServlet extends HttpServlet {
         request.setAttribute("date", dateStr);
         request.setAttribute("startTime", startStr);
         request.setAttribute("endTime", endStr);
-        request.setAttribute("price", price);            // ⭐ TRUYỀN PRICE SANG JSP
+        request.setAttribute("price", price);            
 
         request.getRequestDispatcher("RoomSelectionView.jsp").forward(request, response);
 

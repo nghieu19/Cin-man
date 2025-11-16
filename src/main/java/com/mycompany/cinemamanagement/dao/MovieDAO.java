@@ -48,7 +48,7 @@ public class MovieDAO extends DAO {
     }
 
     // 🎬 Lấy chi tiết phim theo ID
-    public Movie getMovieById(int id) {
+    public Movie getMovieDetails(int id) {
         Movie movie = null;
         String sql = "SELECT * FROM movie WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
